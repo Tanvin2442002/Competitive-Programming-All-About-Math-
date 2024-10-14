@@ -16,34 +16,28 @@ using namespace std;
 int mod = 1000000007;
 int inf = 1e18;
 
-int countones(int n)
-{
-    int ans = 0;
-    for (int i = 0; (1LL << i) <= n; i++)
-    {
-        int purahbe = (n + 1) / (1LL << (i + 1));
-        ans += purahbe * (1LL << i);
-        if((n + 1) % (1LL << i) and n&(1LL<<i))
-        {
-            ans += (n + 1) % (1LL << (i));
-        }
-    }
-    return ans;
+int cntOnes(int n) {
+  int cnt = 0;
+  for(int i=1;i<=n;i<<=1) {
+    int x = (n + 1) / (i << 1);
+    cnt += x * i;
+    if((n + 1) % i && n & i) cnt += (n + 1) % i;
+  }
+  return cnt;
 }
 
-int32_t main()
-{
-    fastio;
-    in;
-    out;
-    int a, b;
-    cin >> a >> b;
-    // cout<<countones(1000000)<<endl;
-    // int ans = 0;
-    // for(int i=0;i<=1000000;i++)
-    // {
-        // ans+= __builtin_popcountll(i);
-    // }
-    // cout<<ans<<endl;
-    cout << countones(b) - countones(a - 1) << endl;
+int32_t main() {
+  fastio;
+  in;
+  out;
+  int a, b;
+  cin >> a >> b;
+  // cout<<countones(1000000)<<endl;
+  // int ans = 0;
+  // for(int i=0;i<=1000000;i++)
+  // {
+  // ans+= __builtin_popcountll(i);
+  // }
+  // cout<<ans<<endl;
+  cout << cntOnes(b) - cntOnes(a - 1) << endl;
 }
